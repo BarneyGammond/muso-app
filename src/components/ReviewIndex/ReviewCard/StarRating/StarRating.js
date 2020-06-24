@@ -9,9 +9,10 @@ export default ({rating}) => {
     return (
         <div>
             {
-                starArray.map((star) => {
+                starArray.map((star,i) => {
                     return star ? 
-                        <svg 
+                        <svg
+                            key={i} 
                             xmlns="http://www.w3.org/2000/svg" 
                             width="20" 
                             fill="white"

@@ -9,6 +9,7 @@ export const onCreateReview = /* GraphQL */ `
       body
       albumId
       rating
+      createdBy
       createdAt
       updatedAt
     }
@@ -22,6 +23,7 @@ export const onUpdateReview = /* GraphQL */ `
       body
       albumId
       rating
+      createdBy
       createdAt
       updatedAt
     }
@@ -35,6 +37,7 @@ export const onDeleteReview = /* GraphQL */ `
       body
       albumId
       rating
+      createdBy
       createdAt
       updatedAt
     }

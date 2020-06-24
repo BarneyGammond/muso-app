@@ -7,7 +7,7 @@ import moment from 'moment'
 import StarRating from './StarRating/StarRating'
 
 
-export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToken,reviewRating}) => {
+export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToken,reviewRating,reviewAuthor}) => {
 
     let [state,setState] = useState({})
 
@@ -15,8 +15,6 @@ export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToke
         getAlbumData(reviewAlbumId,setState,apiToken)
         // eslint-disable-next-line
     },[apiToken])
-
-    console.log(moment(reviewCreationDate))
 
     return (
 
@@ -30,9 +28,12 @@ export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToke
                 <StarRating rating={reviewRating}/>
             </div>
             <p>{reviewBody}</p>
-            <p className='reviewDate'>
-                {moment(reviewCreationDate).format('[created] Do MMMM YYYY')}
-            </p>
+            <div className="submissionData">
+            <p>{`written by ${reviewAuthor}`}</p>
+                <p className='reviewDate'>
+                    {moment(reviewCreationDate).format('[created] Do MMMM YYYY')}
+                </p>
+            </div>
         </div>
     )
 }

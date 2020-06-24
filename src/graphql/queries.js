@@ -9,6 +9,7 @@ export const getReview = /* GraphQL */ `
       body
       albumId
       rating
+      createdBy
       createdAt
       updatedAt
     }
@@ -27,6 +28,7 @@ export const listReviews = /* GraphQL */ `
         body
         albumId
         rating
+        createdBy
         createdAt
         updatedAt
       }

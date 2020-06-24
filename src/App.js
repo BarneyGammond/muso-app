@@ -12,6 +12,7 @@ import Search from './components/Search'
 import AlbumPage from './components/AlbumPage'
 import ReviewForm from './components/ReviewForm/reviewForm'
 import { AmplifySignOut } from '@aws-amplify/ui-react'
+import Profile from './components/Profile/Profile'
 
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'
@@ -39,6 +40,7 @@ class App extends React.Component {
     return (
       <Router>
         <Header />
+
         <Route exact path='/'>
           <ReviewIndex />
         </Route>
@@ -53,9 +55,15 @@ class App extends React.Component {
             albumId={match.params.albumID}
           />
         }/>
+      
         <Route exact path='/albums'>  
           <Search />
         </Route>
+
+        <Route path='/profile'>
+          <Profile />
+        </Route>
+
         <AmplifySignOut />
       </Router>
     )

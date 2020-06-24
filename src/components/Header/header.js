@@ -8,7 +8,10 @@ export default () => {
         <header className='siteHeader'>
             <h1><Link to='/'>Muso</Link></h1>
             <nav>
-                <ul><Link to='/albums'>Album Search</Link></ul>
+                <ul>
+                    <li><Link to='/albums'>Album Search</Link></li>
+                    <li><Link to='/profile'>Profile</Link></li>
+                </ul>
             </nav>
         </header>
     )

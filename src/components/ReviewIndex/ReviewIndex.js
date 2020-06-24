@@ -25,6 +25,7 @@ export default () => {
                 reviewAlbumId={review.albumId}
                 reviewCreationDate={review.createdAt}
                 reviewRating={review.rating}
+                reviewAuthor={review.createdBy}
               />
             ))
         }

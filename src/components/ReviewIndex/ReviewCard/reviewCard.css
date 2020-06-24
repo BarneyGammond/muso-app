@@ -15,8 +15,8 @@
     margin-bottom: 20px;
 }
 
-.reviewDate {
-    text-align: right;
-    padding-right: 15px;
-    margin-bottom: 0;
+.submissionData {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px;
 }
