@@ -10,6 +10,11 @@
             "StackName": "amplify-musoappv3-dev-224007",
             "StackId": "arn:aws:cloudformation:eu-west-1:977740282869:stack/amplify-musoappv3-dev-224007/1bfc44d0-b59a-11ea-b2bb-0a31ba4141ec",
             "AmplifyAppId": "dmg4kfg2gqoo1"
+        },
+        "categories": {
+            "auth": {
+                "musoappv333e6b6fb": {}
+            }
         }
     }
 }

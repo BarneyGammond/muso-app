@@ -1,7 +1,9 @@
 import axios from 'axios'
 import { API, graphqlOperation } from 'aws-amplify'
+import spotifyToken from '../apiInstances/spotifyToken'
+import qs from 'querystring'
 
-import { listReviews as ListReviews} from './graphql/queries'
+import { listReviews as ListReviews} from '../graphql/queries'
 
 export const getAlbumData = (albumId, setState, apiToken) => {
     axios.get("https://api.spotify.com/v1/albums/" + albumId, {
@@ -16,6 +18,18 @@ export const getAlbumData = (albumId, setState, apiToken) => {
         })
         console.log(result)
     }).catch((err) => {
+        console.log(err)
+    })
+}
+
+export const getApiToken = ({setApiToken}) => {
+    spotifyToken.post("https://accounts.spotify.com/api/token", qs.stringify({
+        grant_type: 'client_credentials'
+      })).then((result) => {
+        console.log(result)
+        console.log(this.props)
+        setApiToken(`Bearer ${result.data.access_token}`)
+      }).catch((err) => {
         console.log(err)
     })
 }

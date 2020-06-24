@@ -1,5 +1,11 @@
 {
     "AppSyncApiName": "musoappv3",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
-    "DynamoDBEnableServerSideEncryption": "false"
+    "DynamoDBEnableServerSideEncryption": "false",
+    "AuthCognitoUserPoolId": {
+        "Fn::GetAtt": [
+            "authmusoappv333e6b6fb",
+            "Outputs.UserPoolId"
+        ]
+    }
 }

@@ -11,6 +11,7 @@ import ReviewIndex from './components/ReviewIndex/ReviewIndex'
 import Search from './components/Search'
 import AlbumPage from './components/AlbumPage'
 import ReviewForm from './components/ReviewForm/reviewForm'
+import { AmplifySignOut } from '@aws-amplify/ui-react'
 
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'
@@ -20,14 +21,17 @@ class App extends React.Component {
 
   // execute the query in componentDidMount
   async componentDidMount() {
+    
     spotifyToken.post("https://accounts.spotify.com/api/token", qs.stringify({
         grant_type: 'client_credentials'
       })).then((result) => {
         console.log(result)
+        console.log(this.props)
         this.props.handleApiToken(`Bearer ${result.data.access_token}`)
       }).catch((err) => {
         console.log(err)
     })
+    
   }
 
   render() {
@@ -49,13 +53,13 @@ class App extends React.Component {
             albumId={match.params.albumID}
           />
         }/>
-
         <Route exact path='/albums'>  
           <Search />
         </Route>
+        <AmplifySignOut />
       </Router>
     )
   }
 }
 
-export default App
+export default (App)

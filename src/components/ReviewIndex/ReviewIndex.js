@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 
 import ReviewCard from './ReviewCard'
 
-import { getReviewData } from '../../apiFunctions'
+import { getReviewData } from '../../data/apiFunctions'
 
 export default () => {
 

@@ -1,7 +1,11 @@
-type Review @model {
+type Review @model @auth(rules: [
+  { allow: owner, ownerField: "createdBy", operations: [create, update, delete]},
+  { allow: private, operations: [read] }
+  ]) {
   id: ID!
   title: String!
   body: String!
   albumId: String!
   rating: Int!
+  createdBy: String
 }

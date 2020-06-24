@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import './reviewCard.css';
-import { getAlbumData } from '../../../apiFunctions'
+import { getAlbumData } from '../../../data/apiFunctions'
 import moment from 'moment'
 
 import StarRating from './StarRating/StarRating'
