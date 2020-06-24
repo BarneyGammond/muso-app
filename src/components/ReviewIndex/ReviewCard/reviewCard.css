@@ -1,0 +1,22 @@
+.reviewCard {
+    border-radius: 20px;
+    background: linear-gradient(to right bottom, var(--bg-color) 50%, #4B4B50 110%);
+    padding: 30px 2%;
+}
+
+.artistDetails 
+{
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.reviewCard > * {
+    margin-bottom: 20px;
+}
+
+.reviewDate {
+    text-align: right;
+    padding-right: 15px;
+    margin-bottom: 0;
+}

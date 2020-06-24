@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Quicksand:wght@400;500&display=swap');
+
+:root {
+    --bg-color: #0E0F19;
+    --fg-color: #F2FDFF;
+}
+
+body, input, textarea, select, option {
+    background-color: var(--bg-color);
+    color: var(--fg-color);
+}
+
+button {
+    background-color: var(--fg-color);
+    color: var(--bg-color);
+    padding: 15px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+body {
+    padding: 0 5%
+}
+
+h1, h2, h3, h4, h5, ul {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+p, input, textarea, button{
+    font-family: 'Quicksand', sans-serif;
+}
+
+a {
+    color: var(--fg-color)
+}

@@ -1,0 +1,39 @@
+.albumHeader {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.albumHeaderInner {
+    width: 40vw;
+    height: 40vw;
+    border: 3px white solid;
+    background-size: contain;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.albumHeaderInner::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-color: #000;
+    opacity: 0.5;
+    width: 40vw;
+    height: 40vw;
+}
+
+.albumDetails {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.albumDetails button{
+    margin-top: 30px;
+    background-color: transparent;
+    border: 3px white solid;
+    color: var(--fg-color)
+}

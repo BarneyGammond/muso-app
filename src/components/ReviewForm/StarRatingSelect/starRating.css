@@ -1,0 +1,9 @@
+.starRatingWrapper {
+    display: flex;
+    align-self: flex-start;
+}
+
+.starWrapper {
+    margin-right: 5%;
+    cursor: pointer;
+}

@@ -1,0 +1,7 @@
+type Review @model {
+  id: ID!
+  title: String!
+  body: String!
+  albumId: String!
+  rating: Int!
+}

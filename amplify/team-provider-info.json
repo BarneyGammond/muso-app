@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-musoappv3-dev-224007-authRole",
+            "UnauthRoleArn": "arn:aws:iam::977740282869:role/amplify-musoappv3-dev-224007-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::977740282869:role/amplify-musoappv3-dev-224007-authRole",
+            "Region": "eu-west-1",
+            "DeploymentBucketName": "amplify-musoappv3-dev-224007-deployment",
+            "UnauthRoleName": "amplify-musoappv3-dev-224007-unauthRole",
+            "StackName": "amplify-musoappv3-dev-224007",
+            "StackId": "arn:aws:cloudformation:eu-west-1:977740282869:stack/amplify-musoappv3-dev-224007/1bfc44d0-b59a-11ea-b2bb-0a31ba4141ec",
+            "AmplifyAppId": "dmg4kfg2gqoo1"
+        }
+    }
+}
