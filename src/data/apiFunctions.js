@@ -34,9 +34,19 @@ export const getApiToken = ({setApiToken}) => {
     })
 }
 
-export async function getReviewData(setStateFunction) {
+export const getReviewData = async (setStateFunction) => {
     try {
       const reviewData = await API.graphql(graphqlOperation(ListReviews))
+      console.log('reviewData:', reviewData)
+      setStateFunction(reviewData.data.listReviews.items)
+    } catch (err) {
+      console.log('error fetching reviews...', err)
+    }
+}
+
+export const getFilteredReviewData = async (setStateFunction,variables) => {
+    try {
+      const reviewData = await API.graphql(graphqlOperation(ListReviews,variables))
       console.log('reviewData:', reviewData)
       setStateFunction(reviewData.data.listReviews.items)
     } catch (err) {

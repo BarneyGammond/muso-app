@@ -1,8 +1,11 @@
 import React from 'react'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
+import ReviewIndex from '../ReviewIndex/ReviewIndex'
+
 export default withAuthenticator(() => {
     return (
-        <p>hello there</p>
+        <ReviewIndex
+            filter={{filter: {createdBy: {eq: "BarneyGammond"}}}} />
     )
 })

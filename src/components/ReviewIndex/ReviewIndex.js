@@ -2,14 +2,15 @@ import React, {useState,useEffect} from 'react'
 
 import ReviewCard from './ReviewCard'
 
-import { getReviewData } from '../../data/apiFunctions'
+import { getReviewData, getFilteredReviewData } from '../../data/apiFunctions'
 
-export default () => {
+export default ({filter}) => {
 
     let [reviews,setReviews] = useState([])
 
     useEffect(() => {
-        getReviewData(setReviews)
+        filter ? getFilteredReviewData(setReviews,filter) : getReviewData(setReviews);
+        //eslint-disable-next-line
     },[])
 
     console.log('reviewIndex:' + reviews)
