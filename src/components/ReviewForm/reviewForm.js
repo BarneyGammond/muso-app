@@ -3,7 +3,6 @@ import './reviewForm.css'
 
 //Components
 import StarRating from './StarRatingSelect/StarRatingSelect'
-import { withAuthenticator } from '@aws-amplify/ui-react'
 //Amplify functions
 import { API, graphqlOperation } from 'aws-amplify'
 
@@ -11,7 +10,7 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { createReview as CreateReview} from '../../graphql/mutations'
 import { updateReview as UpdateReview} from '../../graphql/mutations'
 
-export default withAuthenticator(({albumId,edit,reviewTitle,reviewBody}) => {
+export default ({albumId,edit,reviewTitle,reviewBody}) => {
 
     const [reviewData,setReviewData] = useState({
         title: edit ? `${reviewTitle}` : '',
@@ -89,4 +88,4 @@ export default withAuthenticator(({albumId,edit,reviewTitle,reviewBody}) => {
             </button>
         </div>
     )
-})
+}

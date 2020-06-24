@@ -3,7 +3,6 @@ import React from 'react'
 export default ({rating}) => {
 
     let starArray = [0,0,0,0,0].map((star,i) => {
-        console.log(i)
         return i < rating ? 1 : 0;
     })
 
@@ -11,7 +10,6 @@ export default ({rating}) => {
         <div>
             {
                 starArray.map((star) => {
-                    console.log(starArray)
                     return star ? 
                         <svg 
                             xmlns="http://www.w3.org/2000/svg" 
