@@ -56,7 +56,8 @@ export default ({apiToken}) => {
                     value={searchState.albumSearch} 
                     name='albumSearch' 
                     onChange={onChange} 
-                    placeholder='Album Search'>
+                    placeholder='Album Search'
+                    autocomplete="off">
                 </input>
                 <button
                     className='albumSearchButton'

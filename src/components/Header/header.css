@@ -8,3 +8,7 @@
 .siteHeader ul {
     display: flex;
 }
+
+.siteHeader li {
+    padding-left: 1.5rem;
+}
