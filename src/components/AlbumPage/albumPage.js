@@ -7,8 +7,9 @@ import { API, graphqlOperation } from 'aws-amplify'
 import { listReviews as ListReviews} from '../../graphql/queries'
 
 import AlbumPageHeader from './AlbumDetails/albumPageHeader'
+import { Col, Row } from 'antd'
 
-export default ({apiToken,albumID}) => {
+export default ({apiToken,albumId}) => {
 
     let [state,setState] = useState({
         albumName: '',
@@ -23,7 +24,7 @@ export default ({apiToken,albumID}) => {
             const reviewData = await API.graphql(graphqlOperation(ListReviews, {
                 filter: {
                     albumId: {
-                        eq: albumID
+                        eq: albumId
                     }
                 }
             }))
@@ -36,7 +37,7 @@ export default ({apiToken,albumID}) => {
     }
 
     let getAlbum = () => {
-        axios.get("https://api.spotify.com/v1/albums/" + albumID, {
+        axios.get("https://api.spotify.com/v1/albums/" + albumId, {
             headers: {
                 'Authorization': apiToken
             }
@@ -71,18 +72,24 @@ export default ({apiToken,albumID}) => {
                 albumName={state.albumName}
                 albumImgURL={state.albumImgURL}
                 albumArtist={state.albumArtist}
-                albumID={albumID}
+                albumId={albumId}
             />
+            <Row>
             {
                 reviews.map((review, index) => (
-                <ReviewCard
-                    key={index}
-                    reviewTitle={review.title}
-                    reviewBody={review.body}
-                    reviewAlbumId={albumID}
-                />
+                <Col sm={{span:24}} md={{span: 12}} lg={{span:8}}>
+                    <ReviewCard
+                        key={index}
+                        reviewTitle={review.title}
+                        reviewBody={review.body}
+                        reviewAlbumId={albumId}
+                        reviewRating={review.rating}
+                        reviewAuthor={review.createdBy}
+                    />
+                </Col>
                 ))
             }
+            </Row>
         </>
     )
 }

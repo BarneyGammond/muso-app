@@ -1,31 +1,30 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 import './search.css'
 
-import SearchResult from './SearchResult/searchResult'
+import { Input, Layout, Row, Col, Card } from 'antd'
+
+const { Search } = Input
+const { Meta } = Card
 
 export default ({apiToken}) => {
+
+    const history = useHistory()
 
     let [searchState,setSearchState] = useState({
         albumSearch : '',
         albumResults: [],
     })
 
-    let onChange = (event) => {
-        setSearchState({
-            ...searchState,
-            [event.target.name] : event.target.value
-        })
-    }
-
-    let getAlbums = () => {
+    let getAlbums = (value) => {
         axios.get("https://api.spotify.com/v1/search", {
             headers: {
                 'Authorization': apiToken
         },
             params: {
-                'q': searchState.albumSearch,
+                'q': value,
                 'type':'album'
             }
         }).then((result) => {
@@ -49,37 +48,47 @@ export default ({apiToken}) => {
     }
 
     return (
-        <>
-            <div className='albumSearchWrapper'>
-                <input 
-                    className='albumSearchInput'
-                    value={searchState.albumSearch} 
-                    name='albumSearch' 
-                    onChange={onChange} 
-                    placeholder='Album Search'
-                    autocomplete="off">
-                </input>
-                <button
-                    className='albumSearchButton'
-                    onClick={getAlbums}
-                    >Search
-                </button>
-            </div>
-            <div className='resultsWrapper'>
+        <Layout>
+            <Row justify='center'>
+                <Col span={20}>
+                    <Search
+                        className='albumSearchBar'
+                        size='large'
+                        onSearch={value => getAlbums(value)}
+                    />
+                </Col>
+            </Row>
+            <Row>
                 {
                     searchState.albumResults.map((result,i) => {
                         return (
-                            <SearchResult
-                                key={i}
-                                albumName={result.albumName}
-                                artistName={result.albumArtist}
-                                albumImageURL={result.albumURL} 
-                                albumID={result.albumID}
-                            />
+                            <Col span={6}>
+                                {/* <SearchResult
+                                    key={i}
+                                    albumName={result.albumName}
+                                    artistName={result.albumArtist}
+                                    albumImageURL={result.albumURL} 
+                                    albumID={result.albumID}
+                                /> */}
+                                <Card
+                                    key={i}
+                                    onClick={() => history.push(`/album/${result.albumID}`)}
+                                    cover={<img 
+                                        alt='album cover'
+                                        src={result.albumURL}
+                                    />}
+                                    hoverable
+                                >
+                                    <Meta 
+                                        title={result.albumName} 
+                                        description={result.albumArtist}
+                                    />
+                                </Card>
+                            </Col>
                         )
                     })
                 }
-            </div>
-        </>
+            </Row>
+        </Layout>
     )
 }

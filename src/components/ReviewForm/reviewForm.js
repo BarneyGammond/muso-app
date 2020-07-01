@@ -1,25 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import './reviewForm.css'
 
 //Components
-import StarRating from './StarRatingSelect/StarRatingSelect'
+import { Form, Row, Col, Input, Rate, Button } from 'antd'
+
 //Amplify functions
 import { API, graphqlOperation } from 'aws-amplify'
 
 // GraphQL actions
 import { createReview as CreateReview} from '../../graphql/mutations'
-import { updateReview as UpdateReview} from '../../graphql/mutations'
+/* import { updateReview as UpdateReview} from '../../graphql/mutations' */
 
-export default ({albumId,edit,reviewTitle,reviewBody}) => {
+export default ({apiToken,albumId,edit,reviewTitle,reviewBody}) => {
 
-    const [reviewData,setReviewData] = useState({
-        title: edit ? `${reviewTitle}` : '',
-        body: edit ? `${reviewBody}` : '',
-        rating: 0
-    })
+    // States //
 
-    async function createReview() {
-        const { title, body, rating } = reviewData
+    const [albumData, setAlbumData] = useState({})
+
+    // Api Requests //
+
+    let getAlbum = () => {
+        axios.get("https://api.spotify.com/v1/albums/" + albumId, {
+            headers: {
+                'Authorization': apiToken
+            }
+        }).then((result) => {
+            setAlbumData({
+                albumName: result.data.name,
+                albumArtist: result.data.artists[0].name,
+                albumImgURL: result.data.images[0].url
+            })
+            console.log(result)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }
+
+    async function createReview(title, body, rating, albumId) {
         if (title === '' || body === '') return
 
         const review = { title, body, albumId, rating }
@@ -32,60 +50,52 @@ export default ({albumId,edit,reviewTitle,reviewBody}) => {
         }
     }
 
-    async function editReview() {
-        const { title, body } = reviewData
-        if (title === '' || body === '') return
+    // Component Mounting //
 
-        const review = { title, body, albumId }
+    useEffect(() => {
+        getAlbum()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
-        try {
-            API.graphql(graphqlOperation(UpdateReview, { input: review }))
-            console.log('item edited!')
-        } catch (err) {
-            console.log('error creating review...', err)
-        }
-    }
+    // Event Functions //
 
-    let setRating = (num) => {
-        console.log(`setting rating to ${num}`)
-        setReviewData({
-            ...reviewData,
-            rating: num
-        })
-    }
-
-    let onChange = (event) => {
-        setReviewData({
-            ...reviewData,
-            [event.target.name] : event.target.value
-        })
+    const onFormSubmit = ({title,body,rating}, albumId) => {
+        createReview(title,body,rating,albumId)
     }
 
     return (
-        <div className='reviewFormWrapper'>
-            <StarRating 
-                rating={ reviewData.rating }
-                setRating={ setRating }
-            />
-            <input
-                className='reviewArtistInput'
-                name='title'
-                onChange={ onChange }
-                value={ reviewData.title }
-                placeholder='Review Title'
-            />
-            <textarea
-                className='reviewBodyInput'
-                name='body'
-                onChange={ onChange }
-                value={ reviewData.body }
-                placeholder='Review Body'>
-            </textarea>
-            <button 
-                className='reviewSubmitButton' 
-                onClick={ edit ? editReview : createReview }
-                >Submit Review
-            </button>
-        </div>
+
+        <Row justify='center'>
+            <Col span={8}>
+                <img 
+                    alt='album artwork'
+                    style={{width: '100%'}}
+                    src={albumData.albumImgURL} 
+                />
+            </Col>
+            <Col span={8}>
+                <h2 style={{textAlign: 'center'}}>Write Your Review</h2>
+                <Form
+                    onFinish={values => onFormSubmit(values, albumId)}
+                    size='large'
+                    labelCol={{span:6}}
+                    WrapperCol={{span:18}}
+                >
+                    <Form.Item label='Rating' name='rating'>
+                        <Rate />
+                    </Form.Item>
+                    <Form.Item label='Review Title' name='title'>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label='Review Text' name='body'>
+                        <Input.TextArea autoSize={{ minRows: 5 }}/>
+                    </Form.Item>
+                    <Form.Item wrapperCol={{offset: 6}}>
+                        <Button htmlType='submit'>Submit</Button>
+                    </Form.Item>
+                </Form>
+            </Col>
+        </Row>
+        
     )
 }

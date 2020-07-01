@@ -1,22 +1,22 @@
 .reviewCard {
-    border-radius: 20px;
+    /* border-radius: 20px;
     background: linear-gradient(to right bottom, var(--bg-color) 50%, #4B4B50 110%);
-    padding: 30px 2%;
+    padding: 30px 2%; */
 }
 
 .artistDetails 
 {
     display: flex;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     justify-content: space-between;
 }
 
 .reviewCard > * {
-    margin-bottom: 20px;
+/*     margin-bottom: 20px; */
 }
 
 .submissionData {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0px;
+/*     margin-bottom: 0px; */
 }

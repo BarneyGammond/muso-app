@@ -5,13 +5,13 @@ import qs from 'querystring'
 
 import { listReviews as ListReviews} from '../graphql/queries'
 
-export const getAlbumData = (albumId, setState, apiToken) => {
+export const getAlbumData = (albumId, stateFunction, apiToken) => {
     axios.get("https://api.spotify.com/v1/albums/" + albumId, {
         headers: {
             'Authorization': apiToken
         }
     }).then((result) => {
-        setState({
+        stateFunction({
             albumName: result.data.name,
             albumArtist: result.data.artists[0].name,
             albumImgURL: result.data.images[0].url,

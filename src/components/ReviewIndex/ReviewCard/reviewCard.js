@@ -5,6 +5,7 @@ import { getAlbumData } from '../../../data/apiFunctions'
 import moment from 'moment'
 
 import StarRating from './StarRating/StarRating'
+import { Card, Row, Col } from 'antd'
 
 
 export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToken,reviewRating,reviewAuthor}) => {
@@ -18,22 +19,25 @@ export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToke
 
     return (
 
-        <div className='reviewCard'>
+        <Card className='reviewCard'>
             <header>
                 <h3 className='reviewTitle'>{reviewTitle}</h3>
             </header>
-            <div className='artistDetails'>
-                <h4>{state.albumArtist}</h4>
-                <h4><Link to={`album/${reviewAlbumId}`}>{state.albumName}</Link></h4>
-                <StarRating rating={reviewRating}/>
-            </div>
+            <Row>
+                <Col span={6}>
+                    <img style={{width: '80%', margin: '0 0 20%'}} alt='album artwork' src={state.albumImgURL} />
+                </Col>
+                <Col span={18}>
+                    <h4>{state.albumArtist}</h4>
+                    <h4><Link to={`album/${reviewAlbumId}`}>{state.albumName}</Link></h4>
+                </Col>
+            </Row>
+            <StarRating rating={reviewRating}/>
             <p>{reviewBody}</p>
-            <div className="submissionData">
             <p>{`written by ${reviewAuthor}`}</p>
-                <p className='reviewDate'>
-                    {moment(reviewCreationDate).format('[created] Do MMMM YYYY')}
-                </p>
-            </div>
-        </div>
+            <p className='reviewDate'>
+                {moment(reviewCreationDate).format('[created] Do MMMM YYYY')}
+            </p>
+        </Card>
     )
 }

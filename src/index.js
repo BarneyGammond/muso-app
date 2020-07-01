@@ -22,11 +22,10 @@ const store = createStore(
 ReactDOM.render( 
     <Provider store={ store }> 
         <App 
-            handleApiToken={ (apiToken) => store.dispatch({
+            handleApiToken={ apiToken => store.dispatch({
                 type: "ADD_API_TOKEN",
                 apiToken
             }) }
-            apiToken={ store.getState() }
         /> 
     </Provider>, 
     document.getElementById("root"), 
