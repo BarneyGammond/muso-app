@@ -11,6 +11,7 @@ import Search from './components/Search'
 import AlbumPage from './components/AlbumPage'
 import ReviewForm from './components/ReviewForm'
 import { Layout } from 'antd'
+import SignIn from './components/Profile/SignIn/SignIn'
 
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'
@@ -63,6 +64,11 @@ class App extends React.Component {
 
           <Route path='/profile'>
           </Route>
+
+          <Route path='/profile/sign-in'>
+            <SignIn />
+          </Route>
+
           <Footer>A website by Barney</Footer>
         </Layout>
       </Router>

@@ -11,7 +11,12 @@ import config from './aws-exports'
 import reducer from './data/reducer'
 Amplify.configure(config)
 
-const initial = {};
+const initial = {
+    user: {
+        isFetching: false,
+        username: null
+    }
+};
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

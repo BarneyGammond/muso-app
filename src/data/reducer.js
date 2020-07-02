@@ -7,7 +7,6 @@ export default (state, action) => {
             user: {
                 ...state.user,
                 isFetching: true,
-                data: 'none'
             }
         }
         case RECEIVE_USER: return {
@@ -15,7 +14,7 @@ export default (state, action) => {
             user: {
                 ...state.user,
                 isFetching: false,
-                data: action.userData
+                username: action.userData
             }
         }
         case "ADD_API_TOKEN": return {

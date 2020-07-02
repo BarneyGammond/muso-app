@@ -6,7 +6,7 @@ import { Layout, Menu } from 'antd'
 
 const { Header } = Layout
 
-export default ({fetchUser}) => {
+export default ({fetchUser,username}) => {
 
     useEffect(() => {
         fetchUser()
@@ -29,7 +29,7 @@ export default ({fetchUser}) => {
                         onClick={() => setMenuKey(['profile'])} 
                         key="profile"
                     >
-                        <Link to='/profile'>Profile</Link>
+                        <Link to='/profile'>{username ? username : 'Sign In'}</Link>
                     </Menu.Item>
                 </Menu>
             </Header>
