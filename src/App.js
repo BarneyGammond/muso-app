@@ -5,7 +5,7 @@ import './css/main.css'
 import 'antd/dist/antd.css'
 
 // component imports
-import Header from './components/Header/header'
+import Header from './components/Header'
 import ReviewIndex from './components/ReviewIndex/ReviewIndex'
 import Search from './components/Search'
 import AlbumPage from './components/AlbumPage'
@@ -15,7 +15,6 @@ import { Layout } from 'antd'
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'
 import qs from 'querystring'
-import { Auth } from 'aws-amplify'
 
 const { Footer } = Layout
 
@@ -33,8 +32,6 @@ class App extends React.Component {
       }).catch((err) => {
         console.log(err)
     })
-
-    console.log(await Auth.currentUserInfo())
     
   }
 

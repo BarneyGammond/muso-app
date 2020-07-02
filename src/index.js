@@ -1,5 +1,6 @@
 import React from 'react';
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom';
 import './css/reset.css';
@@ -12,11 +13,12 @@ Amplify.configure(config)
 
 const initial = {};
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
     reducer, 
     initial,
-    window.__REDUX_DEVTOOLS_EXTENSION__ 
-        && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    composeEnhancers(applyMiddleware(thunkMiddleware)),
 );
 
 ReactDOM.render( 

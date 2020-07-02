@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './header.css'
 
 import { Link } from 'react-router-dom'
@@ -6,7 +6,12 @@ import { Layout, Menu } from 'antd'
 
 const { Header } = Layout
 
-export default () => {
+export default ({fetchUser}) => {
+
+    useEffect(() => {
+        fetchUser()
+        // eslint-disable-next-line
+    }, [])
 
     const [menuKey,setMenuKey] = useState([])
 
