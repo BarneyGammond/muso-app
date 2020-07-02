@@ -23,7 +23,7 @@ export const fetchUser = () => {
 
         return Auth.currentUserInfo()
             .then(
-                response => response.username
+                response => response ? response.username : null
             )
             .then(
                 username => dispatch(receiveUser(username))

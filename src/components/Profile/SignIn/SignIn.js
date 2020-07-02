@@ -1,10 +1,22 @@
 import React from 'react'
+import { Auth } from 'aws-amplify'
 
 import { Form, Input, Row, Col, Button } from 'antd'
 
 export default () => {
 
-    const onFinish = () => console.log('hello world')
+    async function SignIn(username,password) {
+        try {
+            const user = await Auth.signIn(username, password);
+            console.log(user)
+        } catch (error) {
+            console.log('error signing in', error);
+        }
+    }
+
+    const onFinish = ({username, password}) => {
+        SignIn(username,password)
+    }
 
     return (
         <Row justify='center'>

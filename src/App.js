@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import './css/main.css'
 import 'antd/dist/antd.css'
 
@@ -21,59 +21,62 @@ const { Footer } = Layout
 
 class App extends React.Component {
 
-  // execute the query in componentDidMount
-  async componentDidMount() {
-    
-    spotifyToken.post("https://accounts.spotify.com/api/token", qs.stringify({
-        grant_type: 'client_credentials'
-      })).then((result) => {
-        console.log(result)
-        console.log(this.props)
-        this.props.handleApiToken(`Bearer ${result.data.access_token}`)
-      }).catch((err) => {
-        console.log(err)
-    })
-    
-  }
+    // execute the query in componentDidMount
+    async componentDidMount() {
 
-  render() {
+        spotifyToken.post("https://accounts.spotify.com/api/token", qs.stringify({
+            grant_type: 'client_credentials'
+        })).then((result) => {
+            console.log(result)
+            console.log(this.props)
+            this.props.handleApiToken(`Bearer ${result.data.access_token}`)
+        }).catch((err) => {
+            console.log(err)
+        })
 
-    return (
-      <Router>
-        <Layout>
-          <Header />
+    }
 
-          <Route exact path='/'>
-            <ReviewIndex />
-          </Route>
+    render() {
 
-          <Route exact path='/album/:albumID' component={({ match }) =>
-            <AlbumPage 
-              albumId={match.params.albumID}/>
-          }/>
+        console.log(this.props.username)
 
-          <Route exact path='/album/:albumID/writereview' component={({ match }) =>
-            <ReviewForm 
-              albumId={match.params.albumID}
-            />
-          }/>
-        
-          <Route exact path='/albums'>  
-            <Search />
-          </Route>
+        return (
+            <Router>
+                <Layout>
+                    <Header />
 
-          <Route path='/profile'>
-          </Route>
+                    <Route exact path='/'>
+                        <ReviewIndex />
+                    </Route>
 
-          <Route path='/profile/sign-in'>
-            <SignIn />
-          </Route>
+                    <Route exact path='/album/:albumID' component={({ match }) =>
+                        <AlbumPage
+                            albumId={match.params.albumID} />
+                    } />
 
-          <Footer>A website by Barney</Footer>
-        </Layout>
-      </Router>
-    )
-  }
+                    <Route exact path='/album/:albumID/writereview' component={({ match }) =>
+                        <ReviewForm
+                            albumId={match.params.albumID}
+                        />
+                    } />
+
+                    <Route exact path='/albums'>
+                        <Search />
+                    </Route>
+
+                    <Route path='/profile'>
+                        {this.props.username ? <p>hello world</p> : <Redirect to='/profile/sign-in'/>}
+                    </Route>
+
+                    <Route path='/profile/sign-in'>
+                        <SignIn />
+                    </Route>
+
+                    <Footer>A website by Barney</Footer>
+                </Layout>
+            </Router>
+        )
+    }
 }
 
 export default (App)
