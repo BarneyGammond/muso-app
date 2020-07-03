@@ -28,6 +28,7 @@ export default ({fetchUser,username}) => {
     const signOut = async () => {
         try {
             await Auth.signOut();
+            fetchUser()
         } catch (error) {
             console.log('error signing out: ', error);
         }
@@ -35,7 +36,6 @@ export default ({fetchUser,username}) => {
 
     const onSignOutClick = async () => {
         signOut()
-        fetchUser()
         setMenuKey(['profile'])
     }
 

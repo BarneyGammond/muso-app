@@ -1,0 +1,16 @@
+{
+    "trigger": true,
+    "modules": [
+        "add-to-group"
+    ],
+    "parentResource": "musoappv333e6b6fb",
+    "functionName": "musoappv333e6b6fbPostConfirmation",
+    "resourceName": "musoappv333e6b6fbPostConfirmation",
+    "parentStack": "auth",
+    "triggerEnvs": [],
+    "triggerDir": "/usr/local/lib/node_modules/@aws-amplify/cli/node_modules/amplify-category-auth/provider-utils/awscloudformation/utils/../triggers/PostConfirmation",
+    "triggerTemplate": "PostConfirmation.json.ejs",
+    "roleName": "musoappv333e6b6fbPostConfirmation",
+    "skipEdit": true,
+    "GROUP": "everyone"
+}

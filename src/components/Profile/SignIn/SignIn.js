@@ -3,12 +3,13 @@ import { Auth } from 'aws-amplify'
 
 import { Form, Input, Row, Col, Button } from 'antd'
 
-export default () => {
+export default ({fetchUser}) => {
 
     async function SignIn(username,password) {
         try {
             const user = await Auth.signIn(username, password);
             console.log(user)
+            fetchUser()
         } catch (error) {
             console.log('error signing in', error);
         }

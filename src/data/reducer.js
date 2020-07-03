@@ -1,4 +1,4 @@
-import { REQUEST_USER, RECEIVE_USER } from '../data/actions'
+import { REQUEST_USER, RECEIVE_USER, SIGN_OUT } from '../data/actions'
 
 export default (state, action) => {
     switch (action.type) {
@@ -14,6 +14,13 @@ export default (state, action) => {
             user: {
                 ...state.user,
                 isFetching: false,
+                username: action.userData
+            }
+        }
+        case SIGN_OUT: return {
+            ...state,
+            user: {
+                ...state.user,
                 username: action.userData
             }
         }

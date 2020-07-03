@@ -11,7 +11,7 @@ import Search from './components/Search'
 import AlbumPage from './components/AlbumPage'
 import ReviewForm from './components/ReviewForm'
 import { Layout } from 'antd'
-import SignIn from './components/Profile/SignIn/SignIn'
+import SignIn from './components/Profile/SignIn'
 
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'

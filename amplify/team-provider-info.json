@@ -14,6 +14,11 @@
         "categories": {
             "auth": {
                 "musoappv333e6b6fb": {}
+            },
+            "function": {
+                "musoappv333e6b6fbPostConfirmation": {
+                    "GROUP": "everyone"
+                }
             }
         }
     }

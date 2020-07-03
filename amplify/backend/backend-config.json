@@ -5,7 +5,11 @@
             "providerPlugin": "awscloudformation",
             "output": {
                 "authConfig": {
-                    "additionalAuthenticationProviders": [],
+                    "additionalAuthenticationProviders": [
+                        {
+                            "authenticationType": "AWS_IAM"
+                        }
+                    ],
                     "defaultAuthentication": {
                         "authenticationType": "AMAZON_COGNITO_USER_POOLS",
                         "userPoolConfig": {
@@ -20,8 +24,41 @@
         "musoappv333e6b6fb": {
             "service": "Cognito",
             "providerPlugin": "awscloudformation",
-            "dependsOn": [],
+            "dependsOn": [
+                {
+                    "category": "function",
+                    "resourceName": "musoappv333e6b6fbPostConfirmation",
+                    "triggerProvider": "Cognito",
+                    "attributes": [
+                        "Arn",
+                        "Name"
+                    ]
+                }
+            ],
             "customAuth": false
+        },
+        "userPoolGroups": {
+            "service": "Cognito-UserPool-Groups",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": [
+                {
+                    "category": "auth",
+                    "resourceName": "musoappv333e6b6fb",
+                    "attributes": [
+                        "UserPoolId",
+                        "AppClientIDWeb",
+                        "AppClientID",
+                        "IdentityPoolId"
+                    ]
+                }
+            ]
+        }
+    },
+    "function": {
+        "musoappv333e6b6fbPostConfirmation": {
+            "build": true,
+            "providerPlugin": "awscloudformation",
+            "service": "Lambda"
         }
     }
 }

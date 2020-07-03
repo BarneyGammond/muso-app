@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateReview = /* GraphQL */ `
-  subscription OnCreateReview {
-    onCreateReview {
+  subscription OnCreateReview($createdBy: String) {
+    onCreateReview(createdBy: $createdBy) {
       id
       title
       body
@@ -16,8 +16,8 @@ export const onCreateReview = /* GraphQL */ `
   }
 `;
 export const onUpdateReview = /* GraphQL */ `
-  subscription OnUpdateReview {
-    onUpdateReview {
+  subscription OnUpdateReview($createdBy: String) {
+    onUpdateReview(createdBy: $createdBy) {
       id
       title
       body
@@ -30,8 +30,8 @@ export const onUpdateReview = /* GraphQL */ `
   }
 `;
 export const onDeleteReview = /* GraphQL */ `
-  subscription OnDeleteReview {
-    onDeleteReview {
+  subscription OnDeleteReview($createdBy: String) {
+    onDeleteReview(createdBy: $createdBy) {
       id
       title
       body

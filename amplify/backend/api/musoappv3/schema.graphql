@@ -1,7 +1,14 @@
-type Review @model @auth(rules: [
-  { allow: owner, ownerField: "createdBy", operations: [create, update, delete]},
-  { allow: private, operations: [read] }
-  ]) {
+type Review 
+  @model 
+  @aws_iam
+  @aws_cognito_user_pools
+  @auth(
+    rules: [
+      { allow: owner, ownerField: "createdBy", operations: [create, read, update, delete] },
+      { allow: public, provider: iam, operations: [read] },
+      { allow: groups, groups: ["everyone"], operations: [read] }
+    ]
+  ) {
   id: ID!
   title: String!
   body: String!

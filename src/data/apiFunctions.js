@@ -36,7 +36,7 @@ export const getApiToken = ({setApiToken}) => {
 
 export const getReviewData = async (setStateFunction) => {
     try {
-      const reviewData = await API.graphql(graphqlOperation(ListReviews))
+      const reviewData = await API.graphql({query: ListReviews, authMode: "AWS_IAM"})
       console.log('reviewData:', reviewData)
       setStateFunction(reviewData.data.listReviews.items)
     } catch (err) {
