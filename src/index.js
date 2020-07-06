@@ -33,7 +33,7 @@ ReactDOM.render(
                 type: "ADD_API_TOKEN",
                 apiToken
             }) }
-            username={store.getState().user.username}
+            getUsername={() => store.getState().user.username}
         /> 
     </Provider>, 
     document.getElementById("root"), 

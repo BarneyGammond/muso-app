@@ -44,6 +44,8 @@ export const getReviewData = async (setStateFunction) => {
     }
 }
 
+//Need to put in a filter object as the second parameter {{filter: {exampleAttribute: {eq: 'exampleValue'}}}}
+
 export const getFilteredReviewData = async (setStateFunction,variables) => {
     try {
       const reviewData = await API.graphql(graphqlOperation(ListReviews,variables))

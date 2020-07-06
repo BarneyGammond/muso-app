@@ -24,6 +24,7 @@ export default ({ filter }) => {
                     reviews.map((review, i) => (
                         <Col key={i} sm={{span:24}} md={{span: 12}} lg={{span:8}}>
                             <ReviewCard
+                                reviewId={review.id}
                                 reviewTitle={review.title}
                                 reviewBody={review.body}
                                 reviewAlbumId={review.albumId}

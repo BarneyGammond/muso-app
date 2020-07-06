@@ -6,9 +6,20 @@ import moment from 'moment'
 
 import StarRating from './StarRating/StarRating'
 import { Card, Row, Col } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
 
 
-export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToken,reviewRating,reviewAuthor}) => {
+export default ({
+    reviewId,
+    reviewTitle, 
+    reviewBody, 
+    reviewAlbumId, 
+    reviewCreationDate, 
+    apiToken, 
+    reviewRating, 
+    reviewAuthor, 
+    username 
+}) => {
 
     let [state,setState] = useState({})
 
@@ -19,7 +30,8 @@ export default ({reviewTitle,reviewBody,reviewAlbumId,reviewCreationDate,apiToke
 
     return (
 
-        <Card className='reviewCard'>
+        <Card className='reviewCard' id={ reviewId }>
+            { username === reviewAuthor ? <EditOutlined style={{ position: 'absolute', top:'15px', right:'15px', fontSize: '1.25rem'}}/> : null }
             <header>
                 <h3 className='reviewTitle'>{reviewTitle}</h3>
             </header>

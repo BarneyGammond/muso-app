@@ -1,15 +1,18 @@
 import React from 'react'
 import { Auth } from 'aws-amplify'
+import { useHistory, Redirect } from 'react-router-dom'
 
 import { Form, Input, Row, Col, Button } from 'antd'
 
-export default ({fetchUser}) => {
+export default ({username, fetchUser}) => {
+
+    const history = useHistory()
 
     async function SignIn(username,password) {
         try {
-            const user = await Auth.signIn(username, password);
-            console.log(user)
+            await Auth.signIn(username, password);
             fetchUser()
+            history.push('/profile')
         } catch (error) {
             console.log('error signing in', error);
         }
@@ -19,7 +22,7 @@ export default ({fetchUser}) => {
         SignIn(username,password)
     }
 
-    return (
+    return !username ? (
         <Row justify='center'>
             <Col span={6} style={{paddingTop: '40px'}}>
                 <Form
@@ -47,6 +50,10 @@ export default ({fetchUser}) => {
                 </Form>
             </Col>
         </Row>
+    ) : (
+
+        <Redirect to='/profile' />
+
     )
 
 }

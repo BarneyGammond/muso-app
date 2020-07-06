@@ -1,6 +1,6 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './css/main.css'
 import 'antd/dist/antd.css'
 
@@ -12,6 +12,7 @@ import AlbumPage from './components/AlbumPage'
 import ReviewForm from './components/ReviewForm'
 import { Layout } from 'antd'
 import SignIn from './components/Profile/SignIn'
+import Profile from './components/Profile'
 
 // import data resources
 import spotifyToken from './apiInstances/spotifyToken'
@@ -28,7 +29,6 @@ class App extends React.Component {
             grant_type: 'client_credentials'
         })).then((result) => {
             console.log(result)
-            console.log(this.props)
             this.props.handleApiToken(`Bearer ${result.data.access_token}`)
         }).catch((err) => {
             console.log(err)
@@ -37,8 +37,6 @@ class App extends React.Component {
     }
 
     render() {
-
-        console.log(this.props.username)
 
         return (
             <Router>
@@ -49,14 +47,20 @@ class App extends React.Component {
                         <ReviewIndex />
                     </Route>
 
-                    <Route exact path='/album/:albumID' component={({ match }) =>
+                    <Route exact path='/album/:albumId' component={({ match }) =>
                         <AlbumPage
-                            albumId={match.params.albumID} />
+                            albumId={match.params.albumId} />
                     } />
 
-                    <Route exact path='/album/:albumID/writereview' component={({ match }) =>
+                    <Route exact path='/album/:albumId/writereview' component={({ match }) =>
                         <ReviewForm
-                            albumId={match.params.albumID}
+                            albumId={match.params.albumId}
+                        />
+                    } />
+
+                    <Route path='/review/:reviewId/edit' component={({ match }) => 
+                        <ReviewForm
+                            reviewId={match.params.reviewId}
                         />
                     } />
 
@@ -64,11 +68,11 @@ class App extends React.Component {
                         <Search />
                     </Route>
 
-                    <Route path='/profile'>
-                        {this.props.username ? <p>hello world</p> : <Redirect to='/profile/sign-in'/>}
+                    <Route exact path='/profile'>
+                        <Profile />
                     </Route>
 
-                    <Route path='/profile/sign-in'>
+                    <Route exact path='/profile/sign-in'>
                         <SignIn />
                     </Route>
 

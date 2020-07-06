@@ -3,8 +3,12 @@ import SignIn from './SignIn'
 
 import { fetchUser } from '../../../data/actions'
 
+const mapStateToProps = state => ({
+    username: state.user.username
+})
+
 const mapDispatchToProps = dispatch => ({
     fetchUser: () => dispatch(fetchUser())
 })
 
-export default connect(null, mapDispatchToProps)(SignIn)
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

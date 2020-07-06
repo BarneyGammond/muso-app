@@ -4,6 +4,7 @@ import reviewCard from './reviewCard'
 
 const mapStateToProps = (state) => {
     return {
+        username: state.user.username,
         apiToken: state.apiToken
     }
 }
