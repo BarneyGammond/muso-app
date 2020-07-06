@@ -34,7 +34,7 @@ export const getApiToken = ({setApiToken}) => {
     })
 }
 
-export const getReviewData = async (setStateFunction) => {
+export const getReviewsData = async (setStateFunction) => {
     try {
       const reviewData = await API.graphql({query: ListReviews, authMode: "AWS_IAM"})
       console.log('reviewData:', reviewData)
@@ -44,9 +44,9 @@ export const getReviewData = async (setStateFunction) => {
     }
 }
 
-//Need to put in a filter object as the second parameter {{filter: {exampleAttribute: {eq: 'exampleValue'}}}}
+//Need to put in a filter object as the second parameter {filter: {exampleAttribute: {eq: 'exampleValue'}}}
 
-export const getFilteredReviewData = async (setStateFunction,variables) => {
+export const getFilteredReviewsData = async (setStateFunction,variables) => {
     try {
       const reviewData = await API.graphql(graphqlOperation(ListReviews,variables))
       console.log('reviewData:', reviewData)

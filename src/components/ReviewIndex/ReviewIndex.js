@@ -4,7 +4,7 @@ import './reviewIndex.css'
 import ReviewCard from './ReviewCard'
 import { Layout, Row, Col } from 'antd'
 
-import { getReviewData, getFilteredReviewData } from '../../data/apiFunctions'
+import { getReviewsData, getFilteredReviewsData } from '../../data/apiFunctions'
 
 const { Content } = Layout
 
@@ -13,7 +13,7 @@ export default ({ filter }) => {
     let [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        filter ? getFilteredReviewData(setReviews, filter) : getReviewData(setReviews);
+        filter ? getFilteredReviewsData(setReviews, filter) : getReviewsData(setReviews);
         //eslint-disable-next-line
     }, [])
 

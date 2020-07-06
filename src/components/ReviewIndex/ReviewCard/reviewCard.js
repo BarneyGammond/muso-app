@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './reviewCard.css';
 import { getAlbumData } from '../../../data/apiFunctions'
 import moment from 'moment'
+import { useHistory } from 'react-router-dom'
 
 import StarRating from './StarRating/StarRating'
 import { Card, Row, Col } from 'antd'
@@ -21,6 +22,8 @@ export default ({
     username 
 }) => {
 
+    const history = useHistory()
+
     let [state,setState] = useState({})
 
     useEffect(() => {
@@ -28,10 +31,19 @@ export default ({
         // eslint-disable-next-line
     },[apiToken])
 
+    const onEditClick = () => {
+        history.push(`/review/${reviewId}/edit`)
+    }
+
     return (
 
         <Card className='reviewCard' id={ reviewId }>
-            { username === reviewAuthor ? <EditOutlined style={{ position: 'absolute', top:'15px', right:'15px', fontSize: '1.25rem'}}/> : null }
+            { username === reviewAuthor ? 
+                <EditOutlined 
+                    style={{ position: 'absolute', top:'15px', right:'15px', fontSize: '1.25rem' }}
+                    onClick={ onEditClick }
+                /> : null 
+            }
             <header>
                 <h3 className='reviewTitle'>{reviewTitle}</h3>
             </header>

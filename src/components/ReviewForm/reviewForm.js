@@ -9,10 +9,14 @@ import { Form, Row, Col, Input, Rate, Button } from 'antd'
 import { API, graphqlOperation } from 'aws-amplify'
 
 // GraphQL actions
-import { createReview as CreateReview} from '../../graphql/mutations'
+import { createReview as CreateReview } from '../../graphql/mutations'
+import { getReview as GetReview } from '../../graphql/queries'
+import { useForm } from 'antd/lib/form/Form'
 /* import { updateReview as UpdateReview} from '../../graphql/mutations' */
 
-export default ({apiToken,albumId,edit,reviewTitle,reviewBody}) => {
+export default ({apiToken,albumId,reviewId}) => {
+
+    const [form] = Form.useForm()
 
     // States //
 
@@ -37,6 +41,18 @@ export default ({apiToken,albumId,edit,reviewTitle,reviewBody}) => {
         })
     }
 
+    async function getReview(id) {
+        try {
+            //Retrieve the review from GraphQL with the review Id
+            const {data} = await API.graphql(graphqlOperation(GetReview, {id: reviewId}))
+            //Set the form values to the fetched reviews
+            form.setFieldsValue({rating: data.getReview.rating, title: data.getReview.title, body: data.getReview.body})
+            console.log('Review: ',data)
+        } catch (err) {
+            console.log('error fetching review...', err)
+        }
+    }
+
     async function createReview(title, body, rating, albumId) {
         if (title === '' || body === '') return
 
@@ -53,7 +69,8 @@ export default ({apiToken,albumId,edit,reviewTitle,reviewBody}) => {
     // Component Mounting //
 
     useEffect(() => {
-        getAlbum()
+        console.log(reviewId)
+        reviewId ? getReview() : getAlbum()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -76,10 +93,11 @@ export default ({apiToken,albumId,edit,reviewTitle,reviewBody}) => {
             <Col span={8}>
                 <h2 style={{textAlign: 'center'}}>Write Your Review</h2>
                 <Form
+                    form={form}
                     onFinish={values => onFormSubmit(values, albumId)}
                     size='large'
                     labelCol={{span:6}}
-                    WrapperCol={{span:18}}
+                    wrapperCol={{span:18}}
                 >
                     <Form.Item label='Rating' name='rating'>
                         <Rate />
