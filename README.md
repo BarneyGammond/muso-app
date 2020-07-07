@@ -12,6 +12,8 @@ This app was built with React and Redux on top of Amplify. This is a music revie
 
 * Spotify API - Album catalogue data
 
+* Ant Design - Used for frontend UI components
+
 ## Roadmap
 
 1. Looking to include an Artist view with an average review score
